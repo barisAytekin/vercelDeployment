@@ -48,7 +48,7 @@ export default function DynamicTable(props) {
     const fetchProductsAmount = async () => {
       const response = axios
         .get(
-          `https://vercel-deployment-eta.vercel.app/api/vendors/api/productsamount/${props.vendor}`
+          `https://case-backend-e1mh.onrender.com/api/vendors/api/productsamount/${props.vendor}`
         )
         .then(
           (response) => {

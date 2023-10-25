@@ -19,7 +19,7 @@ function App() {
   React.useEffect(() => {
     const fetchVendors = async () => {
       axios
-        .get("https://vercel-deployment-eta.vercel.app/api/vendors/api/vendors")
+        .get("https://case-backend-e1mh.onrender.com/api/vendors/api/vendors")
         .then(
           (response) => {
             console.log(response);
@@ -40,7 +40,7 @@ function App() {
   const fetchMonthlySales = async (data) => {
     axios
       .get(
-        `https://vercel-deployment-eta.vercel.app/api/vendors/api/monthlysales/${data}`
+        `https://case-backend-e1mh.onrender.com/api/vendors/api/monthlysales/${data}`
       )
       .then(
         (response) => {
