@@ -6,6 +6,13 @@ const port = process.env.PORT || 5001;
 connect();
 const app = express();
 app.use(express.json());
+app.use(
+  cors({
+    origin: ["https://vercel-deployment-mthl-frontend.vercel.app"],
+    methods: ["POST", "GET"],
+    credentials: true,
+  })
+);
 
 app.use("/api", require("./routes/myRoutes"));
 app.listen(port, () => console.log(`Server running on port ${port}`));
