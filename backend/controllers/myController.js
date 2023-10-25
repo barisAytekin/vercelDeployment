@@ -71,22 +71,19 @@ const getProductsAmount = asyncHandler(async (req, res) => {
       $unwind: "$cart_item",
     },
   ]);
-  let myArray = [];
-  for (item of products) {
-    let obj = {};
-    obj["name"] = item.name;
-    obj["amount"] = order
+  const myArray = products.map((p) => ({
+    name: p.name,
+    amount: order
       .filter(
         (o) =>
           o.cart_item.product !== null &&
-          o.cart_item.product.toString() === item._id.toString()
+          o.cart_item.product.toString() === p._id.toString()
       )
       .reduce(
         (acc, o) => acc + o.cart_item.item_count * o.cart_item.quantity,
         0
-      );
-    myArray.push(obj);
-  }
+      ),
+  }));
 
   res.status(200).json(myArray);
 });
