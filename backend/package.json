@@ -2,11 +2,10 @@
   "name": "case",
   "version": "1.0.0",
   "description": "case app",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "server": "nodemon server.js",
-    "build": "node server.js"
+    "start": "nodemon index.js",
+    "build": "node index.js"
   },
   "author": "Baris Aytekin",
   "license": "MIT",
