@@ -46,20 +46,24 @@ export default function DynamicTable(props) {
     console.log(props);
     console.log("passed");
     const fetchProductsAmount = async () => {
-      const response = axios.get(`/api/productsamount/${props.vendor}`).then(
-        (response) => {
-          console.log(response);
-          if (response.status === 200) {
-            console.log(response.data);
-            setRows(response.data);
-          } else {
-            console.log(`Status code ${response.status}`);
+      const response = axios
+        .get(
+          `https://vercel-deployment-eta.vercel.app/api/vendors/api/productsamount/${props.vendor}`
+        )
+        .then(
+          (response) => {
+            console.log(response);
+            if (response.status === 200) {
+              console.log(response.data);
+              setRows(response.data);
+            } else {
+              console.log(`Status code ${response.status}`);
+            }
+          },
+          (error) => {
+            console.log(error);
           }
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+        );
       console.log(response.data);
     };
     fetchProductsAmount();

@@ -18,12 +18,38 @@ function App() {
 
   React.useEffect(() => {
     const fetchVendors = async () => {
-      axios.get("/api/vendors").then(
+      axios
+        .get("https://vercel-deployment-eta.vercel.app/api/vendors/api/vendors")
+        .then(
+          (response) => {
+            console.log(response);
+            if (response.status === 200) {
+              setOptionsVendor(response.data);
+              console.log(response.data);
+            } else {
+              console.log(`Status code ${response.status}`);
+            }
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    };
+    fetchVendors();
+  }, []);
+  const fetchMonthlySales = async (data) => {
+    axios
+      .get(
+        `https://vercel-deployment-eta.vercel.app/api/vendors/api/monthlysales/${data}`
+      )
+      .then(
         (response) => {
           console.log(response);
           if (response.status === 200) {
-            setOptionsVendor(response.data);
-            console.log(response.data);
+            response.data.sort((a, b) => {
+              return a._id - b._id;
+            });
+            setSales(response.data);
           } else {
             console.log(`Status code ${response.status}`);
           }
@@ -32,26 +58,6 @@ function App() {
           console.log(error);
         }
       );
-    };
-    fetchVendors();
-  }, []);
-  const fetchMonthlySales = async (data) => {
-    axios.get(`/api/monthlysales/${data}`).then(
-      (response) => {
-        console.log(response);
-        if (response.status === 200) {
-          response.data.sort((a, b) => {
-            return a._id - b._id;
-          });
-          setSales(response.data);
-        } else {
-          console.log(`Status code ${response.status}`);
-        }
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
   };
 
   return (
